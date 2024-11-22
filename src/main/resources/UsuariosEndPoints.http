@@ -1,0 +1,37 @@
+###
+# UsuariosController Endpoints
+###
+
+# Obtener todos los usuarios
+GET http://localhost:8080/api/usuarios
+
+# Obtener un usuario por ID
+GET http://localhost:8080/api/usuarios/1
+
+# Crear un nuevo usuario
+POST http://localhost:8080/api/usuarios
+Content-Type: application/json
+
+{
+  "nombre": "Juan Perez",
+  "email": "juan.perez@example.com",
+  "password": "password123",
+  "enabled": true
+}
+
+# Actualizar un usuario por ID
+PUT http://localhost:8080/api/usuarios/1
+Content-Type: application/json
+
+{
+  "nombre": "Juan Perez Actualizado",
+  "email": "juan.perez@example.com",
+  "password": "newpassword123",
+  "enabled": true
+}
+
+# Eliminar un usuario por ID
+DELETE http://localhost:8080/api/usuarios/1
+
+# Buscar usuario por email
+GET http://localhost:8080/api/usuarios/searchByEmail?email=juan.perez@example.com
