@@ -45,4 +45,27 @@ public class LibrosRepositoryTest {
 
     }
 
+    @Test
+    public void testFindByFormato() {
+
+        Libro libro = new Libro(
+                "123456789",
+                "El Marciano",
+                "Ciencia ficción",
+                "urlphoto",
+                "libro",
+                LocalDate.now(),
+                102
+        );
+
+        Libro libroCreado = librosRepository.save(libro);
+        Assertions.assertTrue(librosRepository.existsById(libroCreado.getId()));
+
+        List<Libro> libros = librosRepository.findByFormato("libro");
+        Assertions.assertFalse(libros.isEmpty());
+
+    }
+
+
+
 }

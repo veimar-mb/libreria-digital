@@ -64,22 +64,8 @@ public class UsuariosController {
      */
     @PutMapping("/{id}")
     public ResponseEntity<Usuario> updateUsuario(@PathVariable Long id, @RequestBody Usuario usuario) {
-
-        Optional<Usuario> usuarioOptional = usuariosService.getUsuarioById(id);
-
-        if (usuarioOptional.isPresent()) {
-            Usuario usuarioToUpdate = usuarioOptional.get();
-
-            usuarioToUpdate.setNombre(usuario.getNombre());
-            usuarioToUpdate.setEmail(usuario.getEmail());
-            usuarioToUpdate.setPassword(usuario.getPassword());
-            usuarioToUpdate.setEnabled(usuario.isEnabled());
-            usuariosService.insertUsuario(usuarioToUpdate);
-            return ResponseEntity.ok(usuarioToUpdate);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-
+        Optional<Usuario> updatedUsuario = usuariosService.updateUsuario(id, usuario);
+        return updatedUsuario.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     /**

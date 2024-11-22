@@ -2,6 +2,7 @@ package com.veimar.libreria_digital.controllers;
 
 import com.veimar.libreria_digital.entities.Libro;
 import com.veimar.libreria_digital.services.LibrosService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -97,6 +98,19 @@ public class LibrosController {
             return ResponseEntity.notFound().build();
         }
 
+    }
+
+    /**
+     * Obtiene libros en paginacion y orden de campo indicado
+     *
+     * @param pagina Numero de pagina de resultados
+     * @param tamanio Numero de elementos de pagina
+     * @param campo Campo sobre el que se ordenaran los resultados
+     * @return el libro correspondiente al ID, o 404 si no se encuentra
+     */
+    @GetMapping("/byPage")
+    public Page<Libro> getLibrosByPage(@RequestParam int pagina, @RequestParam int tamanio, @RequestParam String campo) {
+        return librosService.getLibrosByPage(pagina, tamanio, campo);
     }
 
 }
