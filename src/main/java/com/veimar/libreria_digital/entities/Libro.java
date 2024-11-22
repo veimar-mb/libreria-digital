@@ -1,9 +1,10 @@
 package com.veimar.libreria_digital.entities;
 
-import com.veimar.libreria_digital.interfaces.MinPages;
+import com.veimar.libreria_digital.utils.MinPages;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 @Table(name = "libros")
@@ -36,6 +37,9 @@ public class Libro {
     @Column(name = "numero_paginas")
     @MinPages(minimumPages = 100, message = "El libro debe tener al menos 100 páginas.")
     private Integer numeroPaginas;
+
+    @ManyToMany(mappedBy = "libros")
+    private Set<Usuario> usuarios;
 
     public Libro() {
     }

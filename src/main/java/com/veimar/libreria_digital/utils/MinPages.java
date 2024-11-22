@@ -1,4 +1,4 @@
-package com.veimar.libreria_digital.interfaces;
+package com.veimar.libreria_digital.utils;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;

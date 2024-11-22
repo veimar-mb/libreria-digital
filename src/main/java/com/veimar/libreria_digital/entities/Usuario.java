@@ -6,6 +6,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "usuarios")
@@ -40,6 +42,14 @@ public class Usuario {
     @Column(name = "fecha_modificacion")
     private LocalDateTime fechaModificacion;
 
+    @ManyToMany
+    @JoinTable(
+            name = "usuario_libros",
+            joinColumns = @JoinColumn(name = "usuario_id"),
+            inverseJoinColumns = @JoinColumn(name = "libro_id")
+    )
+    private Set<Libro> libros = new HashSet<>();
+
     public Usuario() {
     }
 
@@ -50,6 +60,16 @@ public class Usuario {
         this.enabled = enabled;
         this.fechaCreacion = fechaCreacion;
         this.fechaModificacion = fechaModificacion;
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        this.fechaCreacion = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.fechaModificacion = LocalDateTime.now();
     }
 
     public Long getId() {
